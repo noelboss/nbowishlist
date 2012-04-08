@@ -1,0 +1,54 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+	<f:render partial="FormErrors" />
+	<div class="row">
+		<div class="span7">
+			<f:form method="post" action="update"  enctype="multipart/form-data"  name="newParticipation" object="{newParticipation}" arguments="{wish: wish, newPerson: newPerson}" class="form-horizontal well">
+				<f:render partial="Participation/FormFields" arguments="{wish:wish, newPerson:newPerson, newParticipation:newParticipation}"/>
+				<div class="btn-group">
+					<f:link.action action="show" controller="Wish" arguments="{wish:wish}" class="btn  btn-large">
+						<i class="icon-arrow-left"></i> Abbrechen
+					</f:link.action>
+					<button class="btn btn-success btn-large" type="submit">
+						Geschenk anpassen <i class="icon-ok icon-white"></i>
+					</button>
+				</div>
+			</f:form>
+		</div>
+		<div class="span5">
+			<h1 class="resTitle">{wish.title}
+				<small><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.price}</f:format.currency></small>
+			</h1>
+			<div class="progress progress-striped active
+			<f:if condition='{wish.statusmin} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusmin} < 70'>progress-warning</f:if></f:else></f:if>
+			<f:if condition='{wish.statusmin} == 100'>progress-success</f:if>">
+			  <div class="bar"
+			       style="width: {wish.statusmin}%;"></div>
+			</div>
+			<f:if condition="{wish.images.0}">
+				<div class="slider-wrapper theme-default">
+					<div class="ribbon"></div>
+					<div id="slider" class="nivoSlider">
+						<f:for each="{wish.images}" as="image" key="number">
+							<f:if condition="{image}">
+								<f:image src="uploads/tx_sjwishlist/{image}" alt="{wish.title}" width="470c" height="300c" />
+							</f:if>
+						</f:for>
+					</div>
+				</div>
+			</f:if>
+			<f:format.raw>
+				<f:format.nl2br>
+					{wish.description}
+				</f:format.nl2br>
+			</f:format.raw>
+			<f:if condition="{f:count(subject:'{wish.locations}')} > 0">
+				<hr/>
+				<f:for each="{wish.locations}" as="location" key="number">
+					<f:render partial="Location/Properties" arguments="{location:location, wish:wish.uid, noControls: 1}" />
+				</f:for>
+			</f:if>
+		</div>
+	</div>
+</f:section>

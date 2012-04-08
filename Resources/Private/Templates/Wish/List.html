@@ -1,0 +1,58 @@
+<f:layout name="Default" />
+
+<f:section name="main">
+	<div class="row">
+		<f:for each="{wishes}" as="wish">
+			<f:if condition="{wish.images.0}">
+				<f:then>
+					<div class="span2">
+						<f:link.action action="show" arguments="{wish : wish}"  class="thumbnail">
+							<f:image src="uploads/tx_sjwishlist/{wish.images.0}" alt="{resource.title}" width="170c" height="170c" />
+						</f:link.action>
+					</div>
+					<div class="span4">
+				</f:then>
+				<f:else>
+					<div class="span6">
+				</f:else>
+			</f:if>
+			<h2>
+				<f:link.action action="show" arguments="{wish : wish}" class="noColor">
+				{wish.title} <small><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.price}</f:format.currency></small>
+				</f:link.action>
+			</h2>
+			<div class="progress progress-striped active
+			<f:if condition='{wish.statusmin} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusmin} < 70'>progress-warning</f:if></f:else></f:if>
+			<f:if condition='{wish.statusmin} == 100'>progress-success</f:if>">
+			  <div class="bar"
+			       style="width: {wish.statusmin}%;"></div>
+			</div>
+			<p>
+			<f:link.action action="show" arguments="{wish : wish}" class="noColor">
+				<f:format.crop maxCharacters="250" append="&nbsp;...">{wish.description}</f:format.crop>
+			</f:link.action>
+			</p>
+			<p class="btn-group">
+				<br/>
+					<f:if condition="{wish.hasShares} > 0">
+						<f:then>
+							<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn">
+								<i class="icon-pencil"></i> Geschenk anpassen
+							</f:link.action>
+						</f:then>
+						<f:else>
+							<f:if condition='{wish.statusmin} < 100'>
+								<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn btn-success">
+									<i class="icon-wish icon-white"></i> Schenken
+								</f:link.action>
+							</f:if>
+						</f:else>
+					</f:if>
+				<f:link.action action="show" arguments="{wish : wish}"  class="btn btn">
+				Details <i class="icon-arrow-right"></i>
+			</f:link.action>
+			</p>
+	</div>
+</f:for>
+</div>
+</f:section>

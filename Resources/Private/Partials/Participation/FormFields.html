@@ -1,0 +1,95 @@
+<fieldset>
+	<legend>
+		<f:if condition="{wish.hasShares} > 0">
+			<f:link.action action="delete" controller="Participation"
+						   arguments="{participation: newParticipation, wish:wish}"  class="btn btn btn-danger pull-right">
+				Beteiligung löschen <i class="icon-trash icon-white"></i>
+			</f:link.action>
+		</f:if>
+		Persönliche Angaben
+	</legend>
+	
+	<f:if condition="{newPerson.uid} > 0">
+		<input type="hidden" value="{newPerson.uid}" name="tx_sjwishlist_whishlist[newPerson][__identity]" />
+	</f:if>
+
+	<div class="control-group">
+		<label for="firstname" class="control-label">
+			<f:translate key="tx_sjevents_domain_model_person.firstname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+		</label>
+		<div class="controls">
+			<input type="text" id="firstname" value="{newPerson.firstname}" name="tx_sjwishlist_whishlist[newPerson][firstname]" class="span3" placeholder="" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="lastname" class="control-label">
+			<f:translate key="tx_sjevents_domain_model_person.lastname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+		</label>
+		<div class="controls">
+			<input type="text"  id="lastname" value="{newPerson.lastname}" name="tx_sjwishlist_whishlist[newPerson][lastname]"  class="span3" placeholder="" />
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="email"  class="control-label">
+			<f:translate key="tx_sjevents_domain_model_person.email" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+		</label>
+		<div class="controls">
+			<div class="input-prepend">
+				<span class="add-on">@</span><input type="text" id="email" value="{newPerson.email}" name="tx_sjwishlist_whishlist[newPerson][email]" placeholder="deine@mail.ch"  class="span2"/>
+			</div>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="phone"  class="control-label">
+			<f:translate key="tx_sjevents_domain_model_person.phone" />
+		</label>
+		<div class="controls">
+			<input type="text" id="phone" value="{newPerson.phone}" name="tx_sjwishlist_whishlist[newPerson][phone]" placeholder="optional"  class="span3"/>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="address"  class="control-label">
+			<f:translate key="tx_sjevents_domain_model_person.address" />
+		</label>
+		<div class="controls">
+			<textarea id="address" name="tx_sjwishlist_whishlist[newPerson][address]" rows="10" cols="10" class="span3">{newPerson.address}</textarea>
+		</div>
+	</div>
+</fieldset>
+<fieldset>
+	<legend>Geschenk-Optionen</legend>
+	<br/>
+	<f:if condition="{wish.notes}">
+		<div class="alert alert-info">
+			<a class="close" data-dismiss="alert">&times;</a>
+			<h4 class="alert-heading">Hinweise zum Geschenk</h4>
+			<f:format.raw><f:format.nl2br>{wish.notes}</f:format.nl2br></f:format.raw>
+		</div>
+	</f:if>
+	<div class="control-group">
+		<div class="controls">
+			<label for="more" class="checkbox inline">
+				<input type="checkbox" id="more" value="true"
+				<f:if condition="{newParticipation.share} > 1">checked="checked"</f:if>
+				 data-toggle=".shareGroup" /> Anteil schenken
+			</label>
+		</div>
+	</div>
+	<div class="control-group shareGroup" <f:if condition="{newParticipation.share} > 1">style="display:block;"</f:if>>
+		<label for="share" class="control-label">
+			<f:translate key="tx_sjevents_domain_model_reservation.share" />
+		</label>
+		<div class="controls">
+			<f:form.textfield id="share" property="share" class="span1" placeholder="1" />
+			<p class="help-inline">Bitte hier den Teilbetrag angeben.</p>
+		</div>
+	</div>
+	<div class="control-group">
+		<label for="note" class="control-label">
+			<f:translate key="tx_sjevents_domain_model_reservation.note" />
+		</label>
+		<div class="controls">
+			<f:form.textarea id="note" property="note" rows="10" cols="12" class="span4"/>
+		</div>
+	</div>
+</fieldset>

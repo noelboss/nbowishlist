@@ -1,0 +1,30 @@
+plugin.tx_sjwishlist {
+	view {
+		templateRootPath = {$plugin.tx_sjwishlist.view.templateRootPath}
+		partialRootPath = {$plugin.tx_sjwishlist.view.partialRootPath}
+		layoutRootPath = {$plugin.tx_sjwishlist.view.layoutRootPath}
+	}
+	persistence {
+		storagePid = {$plugin.tx_sjwishlist.persistence.storagePid}
+	}
+}
+
+plugin.tx_sjwishlist._CSS_DEFAULT_STYLE (
+	input.f3-form-error {
+		background-color:#FF9F9F;
+		border: 1px #FF0000 solid;
+	}
+
+	.tx-sjwishlist table {
+		border-collapse:separate;
+		border-spacing:10px;
+	}
+
+	.tx-sjwishlist table th {
+		font-weight:bold;
+	}
+
+	.tx-sjwishlist table td {
+		vertical-align:top;
+	}
+)

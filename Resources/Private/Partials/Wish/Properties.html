@@ -1,0 +1,80 @@
+<div class="row">
+	<f:if condition="{wish.images.0}">
+		<f:then>
+			<div class="span5 down section">
+				<div class="slider-wrapper theme-default">
+					<div class="ribbon"></div>
+					<div id="slider" class="nivoSlider">
+						<f:for each="{wish.images}" as="image" key="number">
+							<f:if condition="{image}">
+								<f:image src="uploads/tx_sjwishlist/{image}" alt="{wish.title}" width="470c" height="300c" />
+							</f:if>
+						</f:for>
+					</div>
+				</div>
+				<section>
+					<p class="btn-group">
+						<f:link.action action="list"  class="btn">
+							<i class="icon-arrow-left"></i> Zurück zur Wunschliste
+						</f:link.action>
+						<f:if condition="{wish.hasShares} > 0">
+							<f:then>
+								<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn">
+									<i class="icon-pencil"></i> Geschenk anpassen
+								</f:link.action>
+							</f:then>
+							<f:else>
+								<f:if condition='{wish.statusmin} < 100'>
+									<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn btn-success">
+										<i class="icon-wish icon-white"></i> Schenken
+									</f:link.action>
+								</f:if>
+							</f:else>
+						</f:if>
+					</p>
+				</section>
+			</div>
+			<div class="span7">
+		</f:then>
+		<f:else>
+			<div class="span12">
+		</f:else>
+	</f:if>
+	<h1 class="resTitle">{wish.title}
+		<small><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.price}</f:format.currency></small>
+	</h1>
+	<div class="progress progress-striped active
+	<f:if condition='{wish.statusmin} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusmin} < 70'>progress-warning</f:if></f:else></f:if>
+	<f:if condition='{wish.statusmin} == 100'>progress-success</f:if>">
+	  <div class="bar"
+	       style="width: {wish.statusmin}%;"></div>
+	</div>
+	<f:format.raw>
+		<f:format.nl2br>
+			{wish.description}
+		</f:format.nl2br>
+	</f:format.raw>
+	<f:if condition="{wish.images.0} < 1">
+		<div class="section">
+			<hr/>
+			<f:link.action action="list"  class="btn">
+				<i class="icon-arrow-left"></i> Zurück zur Wunschliste
+			</f:link.action>
+			<f:if condition="{wish.hasShares} > 0">
+				<f:then>
+					<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn">
+						<i class="icon-pencil"></i> Geschenk anpassen
+					</f:link.action>
+				</f:then>
+				<f:else>
+					<f:if condition='{wish.statusmin} < 100'>
+						<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn btn-success">
+							<i class="icon-wish icon-white"></i> Schenken
+						</f:link.action>
+					</f:if>
+				</f:else>
+			</f:if>
+		</div>
+	</f:if>
+</div>
+</div>
