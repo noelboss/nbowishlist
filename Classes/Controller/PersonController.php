@@ -27,26 +27,26 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Nbowishlist_Controller_PersonController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 * personRepository
 	 *
-	 * @var Tx_Sjwishlist_Domain_Repository_PersonRepository
+	 * @var Tx_Nbowishlist_Domain_Repository_PersonRepository
 	 */
 	protected $personRepository;
 
 	/**
 	 * injectPersonRepository
 	 *
-	 * @param Tx_Sjwishlist_Domain_Repository_PersonRepository $personRepository
+	 * @param Tx_Nbowishlist_Domain_Repository_PersonRepository $personRepository
 	 * @return void
 	 */
-	public function injectPersonRepository(Tx_Sjwishlist_Domain_Repository_PersonRepository $personRepository) {
+	public function injectPersonRepository(Tx_Nbowishlist_Domain_Repository_PersonRepository $personRepository) {
 		$this->personRepository = $personRepository;
 	}
 
@@ -66,7 +66,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @param $person
 	 * @return void
 	 */
-	public function showAction(Tx_Sjwishlist_Domain_Model_Person $person) {
+	public function showAction(Tx_Nbowishlist_Domain_Model_Person $person) {
 		$this->view->assign('person', $person);
 	}
 
@@ -77,7 +77,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @dontvalidate $newPerson
 	 * @return void
 	 */
-	public function newAction(Tx_Sjwishlist_Domain_Model_Person $newPerson = NULL) {
+	public function newAction(Tx_Nbowishlist_Domain_Model_Person $newPerson = NULL) {
 		$this->view->assign('newPerson', $newPerson);
 	}
 
@@ -87,7 +87,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @param $newPerson
 	 * @return void
 	 */
-	public function createAction(Tx_Sjwishlist_Domain_Model_Person $newPerson) {
+	public function createAction(Tx_Nbowishlist_Domain_Model_Person $newPerson) {
 		$this->personRepository->add($newPerson);
 		$this->flashMessageContainer->add('Your new Person was created.');
 		$this->redirect('list');
@@ -99,7 +99,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @param $person
 	 * @return void
 	 */
-	public function editAction(Tx_Sjwishlist_Domain_Model_Person $person) {
+	public function editAction(Tx_Nbowishlist_Domain_Model_Person $person) {
 		$this->view->assign('person', $person);
 	}
 
@@ -109,7 +109,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @param $person
 	 * @return void
 	 */
-	public function updateAction(Tx_Sjwishlist_Domain_Model_Person $person) {
+	public function updateAction(Tx_Nbowishlist_Domain_Model_Person $person) {
 		$this->personRepository->update($person);
 		$this->flashMessageContainer->add('Your Person was updated.');
 		$this->redirect('list');
@@ -121,7 +121,7 @@ class Tx_Sjwishlist_Controller_PersonController extends Tx_Extbase_MVC_Controlle
 	 * @param $person
 	 * @return void
 	 */
-	public function deleteAction(Tx_Sjwishlist_Domain_Model_Person $person) {
+	public function deleteAction(Tx_Nbowishlist_Domain_Model_Person $person) {
 		$this->personRepository->remove($person);
 		$this->flashMessageContainer->add('Your Person was removed.');
 		$this->redirect('list');

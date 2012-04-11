@@ -3,8 +3,8 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_sjwishlist_domain_model_wish'] = array(
-	'ctrl' => $TCA['tx_sjwishlist_domain_model_wish']['ctrl'],
+$TCA['tx_nbowishlist_domain_model_wish'] = array(
+	'ctrl' => $TCA['tx_nbowishlist_domain_model_wish']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, title, description, price, minshare, notes, images, participations',
 	),
@@ -37,8 +37,8 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sjwishlist_domain_model_wish',
-				'foreign_table_where' => 'AND tx_sjwishlist_domain_model_wish.pid=###CURRENT_PID### AND tx_sjwishlist_domain_model_wish.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_nbowishlist_domain_model_wish',
+				'foreign_table_where' => 'AND tx_nbowishlist_domain_model_wish.pid=###CURRENT_PID### AND tx_nbowishlist_domain_model_wish.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -95,7 +95,7 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'title' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.title',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.title',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -104,7 +104,7 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'description' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.description',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.description',
 			'config' => array(
 				'type' => 'text',
 				'cols' => 40,
@@ -114,7 +114,7 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'price' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.price',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.price',
 			'config' => array(
 				'type' => 'input',
 				'size' => 6,
@@ -123,7 +123,7 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'minshare' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.minshare',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.minshare',
 			'config' => array(
 				'type' => 'input',
 				'size' => 4,
@@ -132,7 +132,7 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'notes' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.notes',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.notes',
 			'config' => array(
 				'type' => 'text',
 				'cols' => 40,
@@ -142,11 +142,11 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'images' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.images',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.images',
 			'config' => array(
 				'type' => 'group',
 				'internal_type' => 'file',
-				'uploadfolder' => 'uploads/tx_sjwishlist',
+				'uploadfolder' => 'uploads/tx_nbowishlist',
 				'minitems' => 0,
 				'maxitems' => 10,
 				'disable_controls' => 'upload',
@@ -158,10 +158,10 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 		),
 		'participations' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish.participations',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish.participations',
 			'config' => array(
 				'type' => 'inline',
-				'foreign_table' => 'tx_sjwishlist_domain_model_participation',
+				'foreign_table' => 'tx_nbowishlist_domain_model_participation',
 				'foreign_field' => 'wish',
 				// manually added
 				'foreign_label' => 'person',

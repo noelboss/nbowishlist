@@ -3,8 +3,8 @@ if (!defined ('TYPO3_MODE')) {
 	die ('Access denied.');
 }
 
-$TCA['tx_sjwishlist_domain_model_participation'] = array(
-	'ctrl' => $TCA['tx_sjwishlist_domain_model_participation']['ctrl'],
+$TCA['tx_nbowishlist_domain_model_participation'] = array(
+	'ctrl' => $TCA['tx_nbowishlist_domain_model_participation']['ctrl'],
 	'interface' => array(
 		'showRecordFieldList' => 'sys_language_uid, l10n_parent, l10n_diffsource, hidden, share, note, person, wish',
 	),
@@ -37,8 +37,8 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 				'items' => array(
 					array('', 0),
 				),
-				'foreign_table' => 'tx_sjwishlist_domain_model_participation',
-				'foreign_table_where' => 'AND tx_sjwishlist_domain_model_participation.pid=###CURRENT_PID### AND tx_sjwishlist_domain_model_participation.sys_language_uid IN (-1,0)',
+				'foreign_table' => 'tx_nbowishlist_domain_model_participation',
+				'foreign_table_where' => 'AND tx_nbowishlist_domain_model_participation.pid=###CURRENT_PID### AND tx_nbowishlist_domain_model_participation.sys_language_uid IN (-1,0)',
 			),
 		),
 		'l10n_diffsource' => array(
@@ -95,7 +95,7 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 		),
 		'share' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_participation.share',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_participation.share',
 			'config' => array(
 				'type' => 'input',
 				'size' => 30,
@@ -105,7 +105,7 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 		),
 		'note' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_participation.note',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_participation.note',
 			'config' => array(
 				'type' => 'text',
 				'cols' => 40,
@@ -115,10 +115,10 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 		),
 		'person' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_participation.person',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_participation.person',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_sjevents_domain_model_person',
+				'foreign_table' => 'tx_nboevents_domain_model_person',
 				'minitems' => 1,
 				'maxitems' => 1,
 				'wizards' => array(
@@ -137,7 +137,7 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table' => 'tx_sjevents_domain_model_person',
+							'table' => 'tx_nboevents_domain_model_person',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 						),
@@ -148,10 +148,10 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 		),
 		'wish' => array(
 			'exclude' => 0,
-			'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_participation.wish',
+			'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_participation.wish',
 			'config' => array(
 				'type' => 'select',
-				'foreign_table' => 'tx_sjwishlist_domain_model_wish',
+				'foreign_table' => 'tx_nbowishlist_domain_model_wish',
 				'minitems' => 1,
 				'maxitems' => 1,
 				'wizards' => array(
@@ -170,7 +170,7 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 						'title' => 'Create new',
 						'icon' => 'add.gif',
 						'params' => array(
-							'table' => 'tx_sjwishlist_domain_model_wish',
+							'table' => 'tx_nbowishlist_domain_model_wish',
 							'pid' => '###CURRENT_PID###',
 							'setValue' => 'prepend'
 						),

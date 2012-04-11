@@ -11,11 +11,11 @@ Tx_Extbase_Utility_Extension::registerPlugin(
 
 t3lib_extMgm::addStaticFile($_EXTKEY, 'Configuration/TypoScript', 'Wish List');
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_sjwishlist_domain_model_wish', 'EXT:sjwishlist/Resources/Private/Language/locallang_csh_tx_sjwishlist_domain_model_wish.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_sjwishlist_domain_model_wish');
-$TCA['tx_sjwishlist_domain_model_wish'] = array(
+t3lib_extMgm::addLLrefForTCAdescr('tx_nbowishlist_domain_model_wish', 'EXT:nbowishlist/Resources/Private/Language/locallang_csh_tx_nbowishlist_domain_model_wish.xml');
+t3lib_extMgm::allowTableOnStandardPages('tx_nbowishlist_domain_model_wish');
+$TCA['tx_nbowishlist_domain_model_wish'] = array(
 	'ctrl' => array(
-		'title'	=> 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_wish',
+		'title'	=> 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_wish',
 		'label' => 'title',
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -34,18 +34,18 @@ $TCA['tx_sjwishlist_domain_model_wish'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Wish.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sjwishlist_domain_model_wish.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_nbowishlist_domain_model_wish.gif'
 	),
 );
 
-t3lib_div::loadTCA("tx_sjevents_domain_model_person");
-$tmp_sjwishlist_columns = array(
+t3lib_div::loadTCA("tx_nboevents_domain_model_person");
+$tmp_nbowishlist_columns = array(
 	'participations' => array(
 		'exclude' => 0,
-		'label' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_person.participations',
+		'label' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_person.participations',
 		'config' => array(
 			'type' => 'inline',
-			'foreign_table' => 'tx_sjwishlist_domain_model_participation',
+			'foreign_table' => 'tx_nbowishlist_domain_model_participation',
 			'foreign_field' => 'person',
 			'maxitems'      => 9999,
 			'appearance' => array(
@@ -58,16 +58,16 @@ $tmp_sjwishlist_columns = array(
 		),
 	),
 );
-t3lib_extMgm::addTCAcolumns("tx_sjevents_domain_model_person",$tmp_sjwishlist_columns,1);
-t3lib_extMgm::addToAllTCAtypes('tx_sjevents_domain_model_person', 'participations','','after:reservations');
+t3lib_extMgm::addTCAcolumns("tx_nboevents_domain_model_person",$tmp_nbowishlist_columns,1);
+t3lib_extMgm::addToAllTCAtypes('tx_nboevents_domain_model_person', 'participations','','after:reservations');
 
-t3lib_extMgm::addLLrefForTCAdescr('tx_sjwishlist_domain_model_participation', 'EXT:sjwishlist/Resources/Private/Language/locallang_csh_tx_sjwishlist_domain_model_participation.xml');
-t3lib_extMgm::allowTableOnStandardPages('tx_sjwishlist_domain_model_participation');
-$TCA['tx_sjwishlist_domain_model_participation'] = array(
+t3lib_extMgm::addLLrefForTCAdescr('tx_nbowishlist_domain_model_participation', 'EXT:nbowishlist/Resources/Private/Language/locallang_csh_tx_nbowishlist_domain_model_participation.xml');
+t3lib_extMgm::allowTableOnStandardPages('tx_nbowishlist_domain_model_participation');
+$TCA['tx_nbowishlist_domain_model_participation'] = array(
 	'ctrl' => array(
-		'title' => 'LLL:EXT:sjwishlist/Resources/Private/Language/locallang_db.xml:tx_sjwishlist_domain_model_participation',
+		'title' => 'LLL:EXT:nbowishlist/Resources/Private/Language/locallang_db.xml:tx_nbowishlist_domain_model_participation',
 		'label' => 'share',
-		'label_userFunc' => 'EXT:sjwishlist/Classes/Domain/Model/Participation.php:Tx_Sjwishlist_Domain_Model_Participation->getLabel',
+		'label_userFunc' => 'EXT:nbowishlist/Classes/Domain/Model/Participation.php:Tx_Nbowishlist_Domain_Model_Participation->getLabel',
 		
 		'tstamp' => 'tstamp',
 		'crdate' => 'crdate',
@@ -86,8 +86,20 @@ $TCA['tx_sjwishlist_domain_model_participation'] = array(
 			'endtime' => 'endtime',
 		),
 		'dynamicConfigFile' => t3lib_extMgm::extPath($_EXTKEY) . 'Configuration/TCA/Participation.php',
-		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_sjwishlist_domain_model_participation.gif'
+		'iconfile' => t3lib_extMgm::extRelPath($_EXTKEY) . 'Resources/Public/Icons/tx_nbowishlist_domain_model_participation.gif'
 	),
 );
 
+
+if (TYPO3_MODE == 'BE') {  
+	// Add Wizard Icon
+	$TBE_MODULES_EXT['xMOD_db_new_content_el']['addElClasses']['Tx_Nbowishlist_Utilities_PluginWizard'] = t3lib_extMgm::extPath($_EXTKEY).'Classes/Utility/Backend/PluginWizard.php';
+
+	// Add tables on Pages:
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_wish'][0]['fList'] = 'title,price,images';
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_wish'][0]['icon'] = TRUE;
+	
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_participation'][0]['fList'] = 'person,wish,share';
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_participation'][0]['icon'] = TRUE;
+}
 ?>

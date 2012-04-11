@@ -10,49 +10,49 @@
 	</legend>
 	
 	<f:if condition="{newPerson.uid} > 0">
-		<input type="hidden" value="{newPerson.uid}" name="tx_sjwishlist_whishlist[newPerson][__identity]" />
+		<input type="hidden" value="{newPerson.uid}" name="tx_nbowishlist_whishlist[newPerson][__identity]" />
 	</f:if>
 
 	<div class="control-group">
 		<label for="firstname" class="control-label">
-			<f:translate key="tx_sjevents_domain_model_person.firstname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+			<f:translate key="tx_nboevents_domain_model_person.firstname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
 		</label>
 		<div class="controls">
-			<input type="text" id="firstname" value="{newPerson.firstname}" name="tx_sjwishlist_whishlist[newPerson][firstname]" class="span3" placeholder="" />
+			<input type="text" id="firstname" value="{newPerson.firstname}" name="tx_nbowishlist_whishlist[newPerson][firstname]" class="span3" placeholder="" />
 		</div>
 	</div>
 	<div class="control-group">
 		<label for="lastname" class="control-label">
-			<f:translate key="tx_sjevents_domain_model_person.lastname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+			<f:translate key="tx_nboevents_domain_model_person.lastname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
 		</label>
 		<div class="controls">
-			<input type="text"  id="lastname" value="{newPerson.lastname}" name="tx_sjwishlist_whishlist[newPerson][lastname]"  class="span3" placeholder="" />
+			<input type="text"  id="lastname" value="{newPerson.lastname}" name="tx_nbowishlist_whishlist[newPerson][lastname]"  class="span3" placeholder="" />
 		</div>
 	</div>
 	<div class="control-group">
 		<label for="email"  class="control-label">
-			<f:translate key="tx_sjevents_domain_model_person.email" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
+			<f:translate key="tx_nboevents_domain_model_person.email" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
 		</label>
 		<div class="controls">
 			<div class="input-prepend">
-				<span class="add-on">@</span><input type="text" id="email" value="{newPerson.email}" name="tx_sjwishlist_whishlist[newPerson][email]" placeholder="deine@mail.ch"  class="span2"/>
+				<span class="add-on">@</span><input type="text" id="email" value="{newPerson.email}" name="tx_nbowishlist_whishlist[newPerson][email]" placeholder="deine@mail.ch"  class="span2"/>
 			</div>
 		</div>
 	</div>
 	<div class="control-group">
 		<label for="phone"  class="control-label">
-			<f:translate key="tx_sjevents_domain_model_person.phone" />
+			<f:translate key="tx_nboevents_domain_model_person.phone" />
 		</label>
 		<div class="controls">
-			<input type="text" id="phone" value="{newPerson.phone}" name="tx_sjwishlist_whishlist[newPerson][phone]" placeholder="optional"  class="span3"/>
+			<input type="text" id="phone" value="{newPerson.phone}" name="tx_nbowishlist_whishlist[newPerson][phone]" placeholder="optional"  class="span3"/>
 		</div>
 	</div>
 	<div class="control-group">
 		<label for="address"  class="control-label">
-			<f:translate key="tx_sjevents_domain_model_person.address" />
+			<f:translate key="tx_nboevents_domain_model_person.address" />
 		</label>
 		<div class="controls">
-			<textarea id="address" name="tx_sjwishlist_whishlist[newPerson][address]" rows="10" cols="10" class="span3">{newPerson.address}</textarea>
+			<textarea id="address" name="tx_nbowishlist_whishlist[newPerson][address]" rows="10" cols="10" class="span3">{newPerson.address}</textarea>
 		</div>
 	</div>
 </fieldset>
@@ -66,27 +66,69 @@
 			<f:format.raw><f:format.nl2br>{wish.notes}</f:format.nl2br></f:format.raw>
 		</div>
 	</f:if>
-	<div class="control-group">
-		<div class="controls">
-			<label for="more" class="checkbox inline">
-				<input type="checkbox" id="more" value="true"
-				<f:if condition="{newParticipation.share} > 1">checked="checked"</f:if>
-				 data-toggle=".shareGroup" /> Anteil schenken
-			</label>
-		</div>
-	</div>
-	<div class="control-group shareGroup" <f:if condition="{newParticipation.share} > 1">style="display:block;"</f:if>>
-		<label for="share" class="control-label">
-			<f:translate key="tx_sjevents_domain_model_reservation.share" />
-		</label>
-		<div class="controls">
-			<f:form.textfield id="share" property="share" class="span1" placeholder="1" />
-			<p class="help-inline">Bitte hier den Teilbetrag angeben.</p>
-		</div>
-	</div>
+	<f:if condition="{wish.price}">
+		<f:then>
+			<f:if condition="{wish.minshare}">
+			<f:then>
+				<div class="control-group shareGroup">
+					<label class="control-label">
+						Beitrag anpassen
+					</label>
+					<div class="controls sliderControll">
+						<div class="slider" 
+							data-status="{wish.status}" 
+							data-share="{newParticipation.share}" 
+							data-price="{wish.price}" 
+							data-step="{wish.minshare}"			 data-target=".share" data-bar=".bar">
+							
+							
+							<div class="progress progress-striped active
+							<f:if condition='{wish.statusMinPercent} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusMinPercent} < 70'>progress-warning</f:if></f:else></f:if>
+							<f:if condition='{wish.statusMinPercent} == 100'>progress-success</f:if>">
+							  <div class="bar" style="width: {wish.statusMinPercent}%;"></div>
+							</div>	
+						</div>
+						<span class="minmax pull-left"><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.minshare}</f:format.currency></span>
+						<span class="minmax pull-right"><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.remaining}</f:format.currency></span>
+					</div>
+				</div>
+				<div class="control-group shareGroup">
+					<label class="control-label">
+						<f:translate key="tx_nboevents_domain_model_reservation.share" />
+					</label>
+					<div class="controls">
+							<input type="text" class="share span1" value="<f:if condition="!{newParticipation.share}"><f:then><f:format.currency decimalSeparator='.'>{wish.minshare}</f:format.currency></f:then><f:else><f:format.currency decimalSeparator='.'>{newParticipation.share}</f:format.currency></f:else></f:if>" disabled="disabled" />
+							<f:form.hidden property="share" class="share" value="" />
+						<p class="help-inline">CHF</p>
+					</div>
+				</div>
+			</f:then>
+			<f:else>
+				<div class="control-group shareGroup">
+					<label class="control-label">
+						<f:translate key="tx_nboevents_domain_model_reservation.price" />
+					</label>
+					<div class="controls">
+						<input type="text" class="span1" disabled="disabled" value="<f:format.currency currencySign='CHF' decimalSeparator='.' thousandsSeparator="'">{wish.price}</f:format.currency>">
+					</div>
+				</div>
+			</f:else>
+			</f:if>
+		</f:then>
+		<f:else>
+			<div class="control-group shareGroup">
+				<label class="control-label">
+					<f:translate key="tx_nboevents_domain_model_reservation.price" />
+				</label>
+				<div class="controls">
+					Preis nach eigenem Ermessen
+				</div>
+			</div>
+		</f:else>
+	</f:if>
 	<div class="control-group">
 		<label for="note" class="control-label">
-			<f:translate key="tx_sjevents_domain_model_reservation.note" />
+			<f:translate key="tx_nboevents_domain_model_reservation.note" />
 		</label>
 		<div class="controls">
 			<f:form.textarea id="note" property="note" rows="10" cols="12" class="span4"/>

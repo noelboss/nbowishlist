@@ -27,11 +27,11 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Nbowishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * Title
@@ -58,7 +58,7 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Maximum Reservations
 	 *
-	 * @var integer
+	 * @var float
 	 */
 	protected $minshare;
 
@@ -79,7 +79,7 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Participations
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation>
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation>
 	 */
 	protected $participations;
 
@@ -174,6 +174,15 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	public function getMinshare() {
 		return $this->minshare;
 	}
+	
+	/**
+	 * Returns the minshare in percent
+	 *
+	 * @return float $minsharePercent
+	 */
+	public function getMinsharePercent() {
+		return $this->minshare / ($this->price / 100);
+	}
 
 	/**
 	 * Sets the minshare
@@ -226,27 +235,27 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Adds a Participation
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Participation $participation
+	 * @param Tx_Nbowishlist_Domain_Model_Participation $participation
 	 * @return void
 	 */
-	public function addParticipation(Tx_Sjwishlist_Domain_Model_Participation $participation) {
+	public function addParticipation(Tx_Nbowishlist_Domain_Model_Participation $participation) {
 		$this->participations->attach($participation);
 	}
 
 	/**
 	 * Removes a Participation
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Participation $participationToRemove The Participation to be removed
+	 * @param Tx_Nbowishlist_Domain_Model_Participation $participationToRemove The Participation to be removed
 	 * @return void
 	 */
-	public function removeParticipation(Tx_Sjwishlist_Domain_Model_Participation $participationToRemove) {
+	public function removeParticipation(Tx_Nbowishlist_Domain_Model_Participation $participationToRemove) {
 		$this->participations->detach($participationToRemove);
 	}
 
 	/**
 	 * Returns the participations
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation> $participations
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation> $participations
 	 */
 	public function getParticipations() {
 		return $this->participations;
@@ -255,7 +264,7 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	/**
 	 * Sets the participations
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation> $participations
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation> $participations
 	 * @return void
 	 */
 	public function setParticipations(Tx_Extbase_Persistence_ObjectStorage $participations) {
@@ -267,9 +276,32 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	 *
 	 */
 	public function getStatus() {
-		$repo = t3lib_div::makeInstance('Tx_Sjwishlist_Domain_Repository_ParticipationRepository');
+		$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
 		$status = $repo->sharesByWish($this->getUid());
-		$payed = $status / $this->getPrice() * 100;
+		return $status;
+	}
+	
+	
+	/**
+	 * Get Remaining Amount
+	 *
+	 */
+	public function getRemaining() {
+		return $this->getPrice() - $this->getStatus() + $this->getMinshare();
+	}
+	
+	/**
+	 * Get Payment Status
+	 *
+	 */
+	public function getStatusPercent() {
+		$status = $this->getStatus();
+		$price = $this->getPrice();
+		if($price > 0){
+			$payed = $status / $price * 100;
+		} else if ($status) {
+			$payed = 100;
+		}
 		return $payed;
 	}
 	
@@ -277,34 +309,38 @@ class Tx_Sjwishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractEn
 	 * Get Payment Status
 	 *
 	 */
-	public function getStatusmin() {
-		$payed = $this->getStatus();
-		if($payed < 3){
+	public function getStatusMinPercent() {
+		$status = $this->getStatusPercent();
+		if($status < 3){
 			return 3;
 		}
-		if($payed > 100){
+		if($status > 100){
 			return 100;
 		}
-		return $payed;
+		return $status;
 	}
 	
 	/**
-	 * Event has Reservation
+	 * Get Shares
 	 *
 	 * @return float shares
 	 */
 	public function getShares() {
-		$result =  Tx_Sjevents_Utility_Cookies::getCookieValue('Participation'.$this->getUid());
-		$shares = 0;
-		if($result > 0){
-			$shares = t3lib_div::makeInstance('Tx_Sjwishlist_Domain_Repository_ParticipationRepository');
-		}
-		return $shares;
+		$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
+		return $repo->sharesByWish($this->getUid());
 	}
 	
+	/**
+	 * Get remaining Shares
+	 *
+	 * @return float remaining shares
+	 */
+	public function getSharesRemaining() {
+		return $this->getPrice() - $this->getShares();
+	}
 	
 	/**
-	 * Event has Reservation
+	 * Wish has Reservation
 	 *
 	 * @return boolean shares
 	 */

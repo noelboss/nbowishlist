@@ -27,16 +27,16 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Domain_Model_Person extends Tx_Sjevents_Domain_Model_Person {
+class Tx_Nbowishlist_Domain_Model_Person extends Tx_Nboevents_Domain_Model_Person {
 
 	/**
 	 * Participations
 	 *
-	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation>
+	 * @var Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation>
 	 */
 	protected $participations;
 
@@ -67,27 +67,27 @@ class Tx_Sjwishlist_Domain_Model_Person extends Tx_Sjevents_Domain_Model_Person 
 	/**
 	 * Adds a Participation
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Participation $participation
+	 * @param Tx_Nbowishlist_Domain_Model_Participation $participation
 	 * @return void
 	 */
-	public function addParticipation(Tx_Sjwishlist_Domain_Model_Participation $participation) {
+	public function addParticipation(Tx_Nbowishlist_Domain_Model_Participation $participation) {
 		$this->participations->attach($participation);
 	}
 
 	/**
 	 * Removes a Participation
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Participation $participationToRemove The Participation to be removed
+	 * @param Tx_Nbowishlist_Domain_Model_Participation $participationToRemove The Participation to be removed
 	 * @return void
 	 */
-	public function removeParticipation(Tx_Sjwishlist_Domain_Model_Participation $participationToRemove) {
+	public function removeParticipation(Tx_Nbowishlist_Domain_Model_Participation $participationToRemove) {
 		$this->participations->detach($participationToRemove);
 	}
 
 	/**
 	 * Returns the participations
 	 *
-	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation> $participations
+	 * @return Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation> $participations
 	 */
 	public function getParticipations() {
 		return $this->participations;
@@ -96,7 +96,7 @@ class Tx_Sjwishlist_Domain_Model_Person extends Tx_Sjevents_Domain_Model_Person 
 	/**
 	 * Sets the participations
 	 *
-	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Sjwishlist_Domain_Model_Participation> $participations
+	 * @param Tx_Extbase_Persistence_ObjectStorage<Tx_Nbowishlist_Domain_Model_Participation> $participations
 	 * @return void
 	 */
 	public function setParticipations(Tx_Extbase_Persistence_ObjectStorage $participations) {

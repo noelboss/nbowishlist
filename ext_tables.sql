@@ -1,7 +1,7 @@
 #
-# Table structure for table 'tx_sjwishlist_domain_model_wish'
+# Table structure for table 'tx_nbowishlist_domain_model_wish'
 #
-CREATE TABLE tx_sjwishlist_domain_model_wish (
+CREATE TABLE tx_nbowishlist_domain_model_wish (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
@@ -45,21 +45,21 @@ CREATE TABLE tx_sjwishlist_domain_model_wish (
 );
 
 #
-# Table structure for table 'tx_sjevents_domain_model_person'
+# Table structure for table 'tx_nboevents_domain_model_person'
 #
-CREATE TABLE tx_sjevents_domain_model_person (
+CREATE TABLE tx_nboevents_domain_model_person (
 	participations int(11) unsigned DEFAULT '0' NOT NULL,
 );
 
 #
-# Table structure for table 'tx_sjwishlist_domain_model_participation'
+# Table structure for table 'tx_nbowishlist_domain_model_participation'
 #
-CREATE TABLE tx_sjwishlist_domain_model_participation (
+CREATE TABLE tx_nbowishlist_domain_model_participation (
 
 	uid int(11) NOT NULL auto_increment,
 	pid int(11) DEFAULT '0' NOT NULL,
 
-	person int(11) unsigned DEFAULT '0' NOT NULL,
+	person  int(11) unsigned DEFAULT '0' NOT NULL,
 
 	share double(11,2) DEFAULT '0.00' NOT NULL,
 	note text NOT NULL,
@@ -93,27 +93,5 @@ CREATE TABLE tx_sjwishlist_domain_model_participation (
 	KEY parent (pid),
 	KEY t3ver_oid (t3ver_oid,t3ver_wsid),
 	KEY language (l10n_parent,sys_language_uid)
-
-);
-
-#
-# Table structure for table 'tx_sjwishlist_wish_participation_mm'
-#
-CREATE TABLE tx_sjwishlist_wish_participation_mm (
-	uid_local int(11) unsigned DEFAULT '0' NOT NULL,
-	uid_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting int(11) unsigned DEFAULT '0' NOT NULL,
-	sorting_foreign int(11) unsigned DEFAULT '0' NOT NULL,
-
-	KEY uid_local (uid_local),
-	KEY uid_foreign (uid_foreign)
-);
-
-#
-# Table structure for table 'tx_sjwishlist_domain_model_participation'
-#
-CREATE TABLE tx_sjwishlist_domain_model_participation (
-
-	person  int(11) unsigned DEFAULT '0' NOT NULL,
 
 );

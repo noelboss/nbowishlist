@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Sjwishlist_Controller_WishController.
+ * Test case for class Tx_Nbowishlist_Controller_WishController.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +36,14 @@
  *
  * @author Noel Bossart <n.company@me.com>
  */
-class Tx_Sjwishlist_Controller_WishControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Nbowishlist_Controller_WishControllerTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Sjwishlist_Domain_Model_Wish
+	 * @var Tx_Nbowishlist_Domain_Model_Wish
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Sjwishlist_Domain_Model_Wish();
+		$this->fixture = new Tx_Nbowishlist_Domain_Model_Wish();
 	}
 
 	public function tearDown() {

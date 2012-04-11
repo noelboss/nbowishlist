@@ -1,14 +1,14 @@
-plugin.tx_sjwishlist {
+plugin.tx_nbowishlist {
 	view {
-		# cat=plugin.tx_sjwishlist/file; type=string; label=Path to template root (FE)
-		templateRootPath = EXT:sjwishlist/Resources/Private/Templates/
-		# cat=plugin.tx_sjwishlist/file; type=string; label=Path to template partials (FE)
-		partialRootPath = EXT:sjwishlist/Resources/Private/Partials/
-		# cat=plugin.tx_sjwishlist/file; type=string; label=Path to template layouts (FE)
-		layoutRootPath = EXT:sjwishlist/Resources/Private/Layouts/
+		# cat=plugin.tx_nbowishlist/file; type=string; label=Path to template root (FE)
+		templateRootPath = EXT:nbowishlist/Resources/Private/Templates/
+		# cat=plugin.tx_nbowishlist/file; type=string; label=Path to template partials (FE)
+		partialRootPath = EXT:nbowishlist/Resources/Private/Partials/
+		# cat=plugin.tx_nbowishlist/file; type=string; label=Path to template layouts (FE)
+		layoutRootPath = EXT:nbowishlist/Resources/Private/Layouts/
 	}
 	persistence {
-		# cat=plugin.tx_sjwishlist//a; type=int+; label=Default storage PID
+		# cat=plugin.tx_nbowishlist//a; type=int+; label=Default storage PID
 		storagePid = 
 	}
 }

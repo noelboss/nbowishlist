@@ -31,40 +31,40 @@
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Nbowishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 *
 	 * participationRepository
 	 *
-	 * @var Tx_Sjwishlist_Domain_Repository_ParticipationRepository
+	 * @var Tx_Nbowishlist_Domain_Repository_ParticipationRepository
 	 */
 	protected $participationRepository;
 
 	/**
 	 * injectParticipationRepository
 	 *
-	 * @param Tx_Sjwishlist_Domain_Repository_ParticipationRepository $participationRepository
+	 * @param Tx_Nbowishlist_Domain_Repository_ParticipationRepository $participationRepository
 	 * @return void
 	 */
-	public function injectParticipationRepository(Tx_Sjwishlist_Domain_Repository_ParticipationRepository $participationRepository) {
+	public function injectParticipationRepository(Tx_Nbowishlist_Domain_Repository_ParticipationRepository $participationRepository) {
 		$this->participationRepository = $participationRepository;
 	}
 
 	/**
 	 * personRepository
 	 *
-	 * @var Tx_Sjwishlist_Domain_Repository_PersonRepository
+	 * @var Tx_Nbowishlist_Domain_Repository_PersonRepository
 	 */
 	protected $personRepository;
 
 	/**
 	 * injectPersonRepository
 	 *
-	 * @param Tx_Sjwishlist_Domain_Repository_PersonRepository $personRepository
+	 * @param Tx_Nbowishlist_Domain_Repository_PersonRepository $personRepository
 	 * @return void
 	 */
-	public function injectPersonRepository(Tx_Sjwishlist_Domain_Repository_PersonRepository $personRepository) {
+	public function injectPersonRepository(Tx_Nbowishlist_Domain_Repository_PersonRepository $personRepository) {
 		$this->personRepository = $personRepository;
 	}
 
@@ -84,7 +84,7 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @param $participation
 	 * @return void
 	 */
-	public function showAction(Tx_Sjwishlist_Domain_Model_Participation $participation) {
+	public function showAction(Tx_Nbowishlist_Domain_Model_Participation $participation) {
 		$this->view->assign('participation', $participation);
 	}
 
@@ -98,12 +98,11 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @dontverifyrequesthash
 	 * @return void
 	 */
-	public function newAction(Tx_Sjwishlist_Domain_Model_Wish $wish, Tx_Sjwishlist_Domain_Model_Participation $newParticipation = NULL, Tx_Sjwishlist_Domain_Model_Person $newPerson = NULL) {
+	public function newAction(Tx_Nbowishlist_Domain_Model_Wish $wish, Tx_Nbowishlist_Domain_Model_Participation $newParticipation = NULL, Tx_Nbowishlist_Domain_Model_Person $newPerson = NULL) {
 		if (!isset($newPerson)) {
-			$uid = Tx_Sjevents_Utility_Cookies::getCookieValue('Participation'.$wish->getUid());
+			$uid = Tx_Nboevents_Utility_Cookies::getCookieValue('Participation'.$wish->getUid());
 			if ($this->participationRepository->countByUid($uid) > 0) {
 				$newParticipation = $uid;
-				die('Hello');
 				$person = $this->participationRepository->personByUid($newParticipation);
 				if($this->personRepository->countByUid($person)){
 					$this->redirect(
@@ -115,7 +114,7 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 					);
 				}
 			}
-			$pid = Tx_Sjevents_Utility_Cookies::getCookieValue('Person');
+			$pid = Tx_Nboevents_Utility_Cookies::getCookieValue('Person');
 			$newPerson = $this->personRepository->findByUid($pid);
 		}
 		$this->view->assign('e', $e);		
@@ -133,7 +132,7 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @return void
 	 * @dontverifyrequesthash
 	 */
-	public function createAction(Tx_Sjwishlist_Domain_Model_Participation $newParticipation, Tx_Sjwishlist_Domain_Model_Person $newPerson, Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function createAction(Tx_Nbowishlist_Domain_Model_Participation $newParticipation, Tx_Nbowishlist_Domain_Model_Person $newPerson, Tx_Nbowishlist_Domain_Model_Wish $wish) {
 
 		$this->participationRepository->add($newParticipation);
 		$newParticipation->setShare($newParticipation->getShare());
@@ -150,8 +149,8 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 		$newPerson->addParticipation($newParticipation);
 		$wish->addParticipation($newParticipation);
 
-		Tx_Sjevents_Utility_Cookies::setCookieValue('Participation'.$wish->getUid(), $newParticipation->getUid());
-		Tx_Sjevents_Utility_Cookies::setCookieValue('Person', $newPerson->getUid());
+		Tx_Nboevents_Utility_Cookies::setCookieValue('Participation'.$wish->getUid(), $newParticipation->getUid());
+		Tx_Nboevents_Utility_Cookies::setCookieValue('Person', $newPerson->getUid());
 
 		$this->flashMessageContainer->add('<h3>Danke ' . ($newPerson->getFirstname()) . ' ' . ($newPerson->getLastname()) . '!</h3>Du beteiligst Dich mit ' . ($newParticipation->getShare()) . ' CHF an diesem Geschenk.');
 		$this->redirect('show', 'Wish', NULL, array('wish' => $wish->getUid()));
@@ -168,7 +167,7 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @dontverifyrequesthash
 	 * @return void
 	 */
-	public function editAction(Tx_Sjwishlist_Domain_Model_Participation $newParticipation, Tx_Sjwishlist_Domain_Model_Person $newPerson, Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function editAction(Tx_Nbowishlist_Domain_Model_Participation $newParticipation, Tx_Nbowishlist_Domain_Model_Person $newPerson, Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->view->assign('wish', $wish);
 		$this->view->assign('newParticipation', $newParticipation);
 		$this->view->assign('newPerson', $newPerson);
@@ -183,11 +182,11 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @dontverifyrequesthash
 	 * @return void
 	 */
-	public function updateAction(Tx_Sjwishlist_Domain_Model_Participation $newParticipation, Tx_Sjwishlist_Domain_Model_Person $newPerson, Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function updateAction(Tx_Nbowishlist_Domain_Model_Participation $newParticipation, Tx_Nbowishlist_Domain_Model_Person $newPerson, Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->participationRepository->update($newParticipation);
 		$this->personRepository->update($newPerson);
 
-		Tx_Sjevents_Utility_Cookies::setCookieValue('Person', $newPerson->getUid());
+		Tx_Nboevents_Utility_Cookies::setCookieValue('Person', $newPerson->getUid());
 
 		$this->flashMessageContainer->add('<h3>Danke ' . ($newPerson->getFirstname()) . ' ' . ($newPerson->getLastname()) . '!</h3>Du beteiligst Dich mit ' . ($newParticipation->getShare()) . ' CHF an diesem Geschenk.');
 		$this->redirect('show', 'Wish', NULL, array('wish' => $wish->getUid()));
@@ -200,9 +199,9 @@ class Tx_Sjwishlist_Controller_ParticipationController extends Tx_Extbase_MVC_Co
 	 * @param $wish
 	 * @return void
 	 */
-	public function deleteAction(Tx_Sjwishlist_Domain_Model_Participation $participation, Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function deleteAction(Tx_Nbowishlist_Domain_Model_Participation $participation, Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->participationRepository->remove($participation);
-		Tx_Sjevents_Utility_Cookies::setCookieValue('Participation'.$wish->getUid(), NULL);
+		Tx_Nboevents_Utility_Cookies::setCookieValue('Participation'.$wish->getUid(), NULL);
 
 		$this->flashMessageContainer->add('<h3>Danke!</h3>Deine Geschenk-Beitrag wurde gelöscht.');
 		$this->redirect('show', 'Wish', NULL, array('wish' => $wish));

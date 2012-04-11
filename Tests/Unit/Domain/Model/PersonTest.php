@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Sjwishlist_Domain_Model_Person.
+ * Test case for class Tx_Nbowishlist_Domain_Model_Person.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +36,14 @@
  *
  * @author Noel Bossart <n.company@me.com>
  */
-class Tx_Sjwishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Nbowishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Sjwishlist_Domain_Model_Person
+	 * @var Tx_Nbowishlist_Domain_Model_Person
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Sjwishlist_Domain_Model_Person();
+		$this->fixture = new Tx_Nbowishlist_Domain_Model_Person();
 	}
 
 	public function tearDown() {
@@ -53,7 +53,7 @@ class Tx_Sjwishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTe
 	/**
 	 * @test
 	 */
-	public function getParticipationsReturnsInitialValueForObjectStorageContainingTx_Sjwishlist_Domain_Model_Participation() { 
+	public function getParticipationsReturnsInitialValueForObjectStorageContainingTx_Nbowishlist_Domain_Model_Participation() { 
 		$newObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 		$this->assertEquals(
 			$newObjectStorage,
@@ -64,8 +64,8 @@ class Tx_Sjwishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTe
 	/**
 	 * @test
 	 */
-	public function setParticipationsForObjectStorageContainingTx_Sjwishlist_Domain_Model_ParticipationSetsParticipations() { 
-		$participation = new Tx_Sjwishlist_Domain_Model_Participation();
+	public function setParticipationsForObjectStorageContainingTx_Nbowishlist_Domain_Model_ParticipationSetsParticipations() { 
+		$participation = new Tx_Nbowishlist_Domain_Model_Participation();
 		$objectStorageHoldingExactlyOneParticipations = new Tx_Extbase_Persistence_ObjectStorage();
 		$objectStorageHoldingExactlyOneParticipations->attach($participation);
 		$this->fixture->setParticipations($objectStorageHoldingExactlyOneParticipations);
@@ -80,7 +80,7 @@ class Tx_Sjwishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTe
 	 * @test
 	 */
 	public function addParticipationToObjectStorageHoldingParticipations() {
-		$participation = new Tx_Sjwishlist_Domain_Model_Participation();
+		$participation = new Tx_Nbowishlist_Domain_Model_Participation();
 		$objectStorageHoldingExactlyOneParticipation = new Tx_Extbase_Persistence_ObjectStorage();
 		$objectStorageHoldingExactlyOneParticipation->attach($participation);
 		$this->fixture->addParticipation($participation);
@@ -95,7 +95,7 @@ class Tx_Sjwishlist_Domain_Model_PersonTest extends Tx_Extbase_Tests_Unit_BaseTe
 	 * @test
 	 */
 	public function removeParticipationFromObjectStorageHoldingParticipations() {
-		$participation = new Tx_Sjwishlist_Domain_Model_Participation();
+		$participation = new Tx_Nbowishlist_Domain_Model_Participation();
 		$localObjectStorage = new Tx_Extbase_Persistence_ObjectStorage();
 		$localObjectStorage->attach($participation);
 		$localObjectStorage->detach($participation);

@@ -27,11 +27,11 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Domain_Repository_WishRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Nbowishlist_Domain_Repository_WishRepository extends Tx_Extbase_Persistence_Repository {
 
 }
 ?>

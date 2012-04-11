@@ -27,11 +27,11 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Domain_Repository_ParticipationRepository extends Tx_Extbase_Persistence_Repository {
+class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbase_Persistence_Repository {
 
 	public function findLabel($uid = '0') {
 
@@ -39,9 +39,9 @@ class Tx_Sjwishlist_Domain_Repository_ParticipationRepository extends Tx_Extbase
 		$query->getQuerySettings()->setReturnRawQueryResult(true);
 		$now = time();
 		$queryText = 'SELECT ps.firstname, ps.lastname, wh.title, pc.share
-					FROM `tx_sjwishlist_domain_model_participation` AS pc
-					LEFT JOIN tx_sjwishlist_domain_model_wish AS wh ON pc.wish = wh.uid
-					LEFT JOIN tx_sjevents_domain_model_person AS ps ON pc.person = ps.uid
+					FROM `tx_nbowishlist_domain_model_participation` AS pc
+					LEFT JOIN tx_nbowishlist_domain_model_wish AS wh ON pc.wish = wh.uid
+					LEFT JOIN tx_nboevents_domain_model_person AS ps ON pc.person = ps.uid
 					WHERE pc.uid = \'' . $uid . '\'
 					AND pc.deleted=0
 					AND pc.t3ver_state<=0
@@ -81,7 +81,7 @@ class Tx_Sjwishlist_Domain_Repository_ParticipationRepository extends Tx_Extbase
 			$query->getQuerySettings()->setReturnRawQueryResult(true);
 			$now = time();
 			$queryText = 'SELECT pc.person
-						FROM `tx_sjwishlist_domain_model_participation` AS pc WHERE pc.uid = \'' . $uid . '\'
+						FROM `tx_nbowishlist_domain_model_participation` AS pc WHERE pc.uid = \'' . $uid . '\'
 						AND pc.share > 0
 						AND pc.deleted=0
 						AND pc.t3ver_state<=0
@@ -105,8 +105,8 @@ class Tx_Sjwishlist_Domain_Repository_ParticipationRepository extends Tx_Extbase
 			$query->getQuerySettings()->setReturnRawQueryResult(true);
 			$now = time();
 			$queryText = 'SELECT pc.share
-						FROM `tx_sjwishlist_domain_model_participation` AS pc
-						LEFT JOIN tx_sjwishlist_domain_model_wish AS wh ON pc.wish = wh.uid
+						FROM `tx_nbowishlist_domain_model_participation` AS pc
+						LEFT JOIN tx_nbowishlist_domain_model_wish AS wh ON pc.wish = wh.uid
 						WHERE wh.uid = \'' . $uid . '\'
 						AND pc.deleted=0
 						AND pc.t3ver_state<=0

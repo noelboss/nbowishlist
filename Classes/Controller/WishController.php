@@ -27,26 +27,26 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_ActionController {
+class Tx_Nbowishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_ActionController {
 
 	/**
 	 * wishRepository
 	 *
-	 * @var Tx_Sjwishlist_Domain_Repository_WishRepository
+	 * @var Tx_Nbowishlist_Domain_Repository_WishRepository
 	 */
 	protected $wishRepository;
 
 	/**
 	 * injectWishRepository
 	 *
-	 * @param Tx_Sjwishlist_Domain_Repository_WishRepository $wishRepository
+	 * @param Tx_Nbowishlist_Domain_Repository_WishRepository $wishRepository
 	 * @return void
 	 */
-	public function injectWishRepository(Tx_Sjwishlist_Domain_Repository_WishRepository $wishRepository) {
+	public function injectWishRepository(Tx_Nbowishlist_Domain_Repository_WishRepository $wishRepository) {
 		$this->wishRepository = $wishRepository;
 	}
 
@@ -66,7 +66,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @param $wish
 	 * @return void
 	 */
-	public function showAction(Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function showAction(Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->view->assign('wish', $wish);
 	}
 
@@ -77,7 +77,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @dontvalidate $newWish
 	 * @return void
 	 */
-	public function newAction(Tx_Sjwishlist_Domain_Model_Wish $newWish = NULL) {
+	public function newAction(Tx_Nbowishlist_Domain_Model_Wish $newWish = NULL) {
 		$this->view->assign('newWish', $newWish);
 	}
 
@@ -87,7 +87,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @param $newWish
 	 * @return void
 	 */
-	public function createAction(Tx_Sjwishlist_Domain_Model_Wish $newWish) {
+	public function createAction(Tx_Nbowishlist_Domain_Model_Wish $newWish) {
 		$this->wishRepository->add($newWish);
 		$this->flashMessageContainer->add('Your new Wish was created.');
 		$this->redirect('list');
@@ -99,7 +99,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @param $wish
 	 * @return void
 	 */
-	public function editAction(Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function editAction(Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->view->assign('wish', $wish);
 	}
 
@@ -109,7 +109,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @param $wish
 	 * @return void
 	 */
-	public function updateAction(Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function updateAction(Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->wishRepository->update($wish);
 		$this->flashMessageContainer->add('Your Wish was updated.');
 		$this->redirect('list');
@@ -121,7 +121,7 @@ class Tx_Sjwishlist_Controller_WishController extends Tx_Extbase_MVC_Controller_
 	 * @param $wish
 	 * @return void
 	 */
-	public function deleteAction(Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function deleteAction(Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->wishRepository->remove($wish);
 		$this->flashMessageContainer->add('Your Wish was removed.');
 		$this->redirect('list');

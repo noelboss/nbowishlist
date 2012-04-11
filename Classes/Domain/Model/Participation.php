@@ -27,11 +27,11 @@
 /**
  *
  *
- * @package sjwishlist
+ * @package nbowishlist
  * @license http://www.gnu.org/licenses/gpl.html GNU General Public License, version 3 or later
  *
  */
-class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_AbstractEntity {
+class Tx_Nbowishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_AbstractEntity {
 
 	/**
 	 * Share
@@ -51,14 +51,14 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	/**
 	 * Person
 	 *
-	 * @var Tx_Sjwishlist_Domain_Model_Person
+	 * @var Tx_Nbowishlist_Domain_Model_Person
 	 */
 	protected $person;
 
 	/**
 	 * Wish
 	 *
-	 * @var Tx_Sjwishlist_Domain_Model_Wish
+	 * @var Tx_Nbowishlist_Domain_Model_Wish
 	 */
 	protected $wish;
 
@@ -68,7 +68,7 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	 * @return float $share
 	 */
 	public function getShare() {
-		if($this->share < 1){
+		if(!$this->share){
 			return 1;
 		}
 		return $this->share;
@@ -106,7 +106,7 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	/**
 	 * Returns the person
 	 *
-	 * @return Tx_Sjwishlist_Domain_Model_Person $person
+	 * @return Tx_Nbowishlist_Domain_Model_Person $person
 	 */
 	public function getPerson() {
 		return $this->person;
@@ -115,17 +115,17 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	/**
 	 * Sets the person
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Person $person
+	 * @param Tx_Nbowishlist_Domain_Model_Person $person
 	 * @return void
 	 */
-	public function setPerson(Tx_Sjwishlist_Domain_Model_Person $person) {
+	public function setPerson(Tx_Nbowishlist_Domain_Model_Person $person) {
 		$this->person = $person;
 	}
 
 	/**
 	 * Returns the wish
 	 *
-	 * @return Tx_Sjwishlist_Domain_Model_Wish $wish
+	 * @return Tx_Nbowishlist_Domain_Model_Wish $wish
 	 */
 	public function getWish() {
 		return $this->wish;
@@ -134,10 +134,10 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	/**
 	 * Sets the wish
 	 *
-	 * @param Tx_Sjwishlist_Domain_Model_Wish $wish
+	 * @param Tx_Nbowishlist_Domain_Model_Wish $wish
 	 * @return void
 	 */
-	public function setWish(Tx_Sjwishlist_Domain_Model_Wish $wish) {
+	public function setWish(Tx_Nbowishlist_Domain_Model_Wish $wish) {
 		$this->wish = $wish;
 	}
 	
@@ -150,7 +150,7 @@ class Tx_Sjwishlist_Domain_Model_Participation extends Tx_Extbase_DomainObject_A
 	 */
 	public function getLabel(&$return) {
 		$uid = $return['row']['uid'];
-		$repo = t3lib_div::makeInstance('Tx_Sjwishlist_Domain_Repository_ParticipationRepository');
+		$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
 		$return['title'] = $repo->findLabel($uid);
 	}
 

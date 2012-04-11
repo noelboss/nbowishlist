@@ -2,28 +2,28 @@
 <T3locallang>
 	<meta type="array">
 		<type>database</type>
-		<description>Language labels for database tables/fields belonging to extension 'sjwishlist'</description>
+		<description>Language labels for database tables/fields belonging to extension 'nbowishlist'</description>
 	</meta>
 	<data type="array">
 		<languageKey index="default" type="array">
-			<label index="tx_sjwishlist_domain_model_wish">Wish</label>
-			<label index="tx_sjwishlist_domain_model_wish.title">Title</label>
-			<label index="tx_sjwishlist_domain_model_wish.description">Description</label>
-			<label index="tx_sjwishlist_domain_model_wish.price">Price</label>
-			<label index="tx_sjwishlist_domain_model_wish.minshare">Minimal share</label>
-			<label index="tx_sjwishlist_domain_model_wish.notes">Notes</label>
-			<label index="tx_sjwishlist_domain_model_wish.images">Images</label>
-			<label index="tx_sjwishlist_domain_model_wish.participations">Participations</label>
+			<label index="tx_nbowishlist_domain_model_wish">Wish</label>
+			<label index="tx_nbowishlist_domain_model_wish.title">Title</label>
+			<label index="tx_nbowishlist_domain_model_wish.description">Description</label>
+			<label index="tx_nbowishlist_domain_model_wish.price">Price</label>
+			<label index="tx_nbowishlist_domain_model_wish.minshare">Minimal share</label>
+			<label index="tx_nbowishlist_domain_model_wish.notes">Notes</label>
+			<label index="tx_nbowishlist_domain_model_wish.images">Images</label>
+			<label index="tx_nbowishlist_domain_model_wish.participations">Participations</label>
 
-			<label index="tx_sjwishlist_domain_model_person">Person</label>
-			<label index="tx_sjwishlist_domain_model_person.participations">Participations</label>
-			<label index="tx_sjevents_domain_model_person.tx_extbase_type.Tx_Sjwishlist_Person">Wish List Person</label>
+			<label index="tx_nbowishlist_domain_model_person">Person</label>
+			<label index="tx_nbowishlist_domain_model_person.participations">Participations</label>
+			<label index="tx_nboevents_domain_model_person.tx_extbase_type.Tx_Nbowishlist_Person">Wish List Person</label>
 			
-			<label index="tx_sjwishlist_domain_model_participation">Participation</label>
-			<label index="tx_sjwishlist_domain_model_participation.share">Share</label>
-			<label index="tx_sjwishlist_domain_model_participation.note">Note</label>
-			<label index="tx_sjwishlist_domain_model_participation.person">Person</label>
-			<label index="tx_sjwishlist_domain_model_participation.wish">Wish</label>
+			<label index="tx_nbowishlist_domain_model_participation">Participation</label>
+			<label index="tx_nbowishlist_domain_model_participation.share">Share</label>
+			<label index="tx_nbowishlist_domain_model_participation.note">Note</label>
+			<label index="tx_nbowishlist_domain_model_participation.person">Person</label>
+			<label index="tx_nbowishlist_domain_model_participation.wish">Wish</label>
 
 		</languageKey>
 	</data>

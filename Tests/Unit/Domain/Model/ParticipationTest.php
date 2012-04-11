@@ -25,7 +25,7 @@
  ***************************************************************/
 
 /**
- * Test case for class Tx_Sjwishlist_Domain_Model_Participation.
+ * Test case for class Tx_Nbowishlist_Domain_Model_Participation.
  *
  * @version $Id$
  * @copyright Copyright belongs to the respective authors
@@ -36,14 +36,14 @@
  *
  * @author Noel Bossart <n.company@me.com>
  */
-class Tx_Sjwishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
+class Tx_Nbowishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit_BaseTestCase {
 	/**
-	 * @var Tx_Sjwishlist_Domain_Model_Participation
+	 * @var Tx_Nbowishlist_Domain_Model_Participation
 	 */
 	protected $fixture;
 
 	public function setUp() {
-		$this->fixture = new Tx_Sjwishlist_Domain_Model_Participation();
+		$this->fixture = new Tx_Nbowishlist_Domain_Model_Participation();
 	}
 
 	public function tearDown() {
@@ -92,7 +92,7 @@ class Tx_Sjwishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function getPersonReturnsInitialValueForTx_Sjwishlist_Domain_Model_Person() { 
+	public function getPersonReturnsInitialValueForTx_Nbowishlist_Domain_Model_Person() { 
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getPerson()
@@ -102,8 +102,8 @@ class Tx_Sjwishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setPersonForTx_Sjwishlist_Domain_Model_PersonSetsPerson() { 
-		$dummyObject = new Tx_Sjwishlist_Domain_Model_Person();
+	public function setPersonForTx_Nbowishlist_Domain_Model_PersonSetsPerson() { 
+		$dummyObject = new Tx_Nbowishlist_Domain_Model_Person();
 		$this->fixture->setPerson($dummyObject);
 
 		$this->assertSame(
@@ -115,7 +115,7 @@ class Tx_Sjwishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function getWishReturnsInitialValueForTx_Sjwishlist_Domain_Model_Wish() { 
+	public function getWishReturnsInitialValueForTx_Nbowishlist_Domain_Model_Wish() { 
 		$this->assertEquals(
 			NULL,
 			$this->fixture->getWish()
@@ -125,8 +125,8 @@ class Tx_Sjwishlist_Domain_Model_ParticipationTest extends Tx_Extbase_Tests_Unit
 	/**
 	 * @test
 	 */
-	public function setWishForTx_Sjwishlist_Domain_Model_WishSetsWish() { 
-		$dummyObject = new Tx_Sjwishlist_Domain_Model_Wish();
+	public function setWishForTx_Nbowishlist_Domain_Model_WishSetsWish() { 
+		$dummyObject = new Tx_Nbowishlist_Domain_Model_Wish();
 		$this->fixture->setWish($dummyObject);
 
 		$this->assertSame(

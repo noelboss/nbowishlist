@@ -2,17 +2,17 @@ config.tx_extbase{
     persistence{
         classes{
 
-            Tx_Sjevents_Domain_Model_Person {
+            Tx_Nboevents_Domain_Model_Person {
                 subclasses {
-                    Tx_Sjwishlist_Person = Tx_Sjwishlist_Domain_Model_Person
+                    Tx_Nbowishlist_Person = Tx_Nbowishlist_Domain_Model_Person
 					
           		}
             }
 
-            Tx_Sjwishlist_Domain_Model_Person {
+            Tx_Nbowishlist_Domain_Model_Person {
                 mapping {
-                    tableName = tx_sjevents_domain_model_person
-                    recordType = Tx_Sjwishlist_Person
+                    tableName = tx_nboevents_domain_model_person
+                    recordType = Tx_Nbowishlist_Person
                 }
             }
             

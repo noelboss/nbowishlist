@@ -2,12 +2,12 @@
 
 <f:section name="main">
 	<div class="row">
-		<f:for each="{wishes}" as="wish">
+		<f:for each="{wishes}" as="wish" iteration="iwish">
 			<f:if condition="{wish.images.0}">
 				<f:then>
 					<div class="span2">
 						<f:link.action action="show" arguments="{wish : wish}"  class="thumbnail">
-							<f:image src="uploads/tx_sjwishlist/{wish.images.0}" alt="{resource.title}" width="170c" height="170c" />
+							<f:image src="uploads/tx_nbowishlist/{wish.images.0}" alt="{resource.title}" width="170c" height="170c" />
 						</f:link.action>
 					</div>
 					<div class="span4">
@@ -18,14 +18,29 @@
 			</f:if>
 			<h2>
 				<f:link.action action="show" arguments="{wish : wish}" class="noColor">
-				{wish.title} <small><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.price}</f:format.currency></small>
+					{wish.title} 
+					<small>
+						<f:if condition='{wish.statusMinPercent} == 100'>
+							<f:then>Bereits verschenkt <i class="gifted icon-ok"></i></f:then>
+							<f:else>
+								<f:if condition="{wish.price}">
+									<f:then>
+										<f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.shares}</f:format.currency> von
+										<f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.price}</f:format.currency>
+									</f:then>
+									<f:else>
+										Preis nach eigenem Ermessen
+									</f:else>
+								</f:if>
+							</f:else>
+						</f:if>
+					</small>
 				</f:link.action>
 			</h2>
 			<div class="progress progress-striped active
-			<f:if condition='{wish.statusmin} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusmin} < 70'>progress-warning</f:if></f:else></f:if>
-			<f:if condition='{wish.statusmin} == 100'>progress-success</f:if>">
-			  <div class="bar"
-			       style="width: {wish.statusmin}%;"></div>
+			<f:if condition='{wish.statusMinPercent} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusMinPercent} < 70'>progress-warning</f:if></f:else></f:if>
+			<f:if condition='{wish.statusMinPercent} == 100'>progress-success</f:if>">
+			  <div class="bar" style="width: {wish.statusMinPercent}%;"></div>
 			</div>
 			<p>
 			<f:link.action action="show" arguments="{wish : wish}" class="noColor">
@@ -41,9 +56,9 @@
 							</f:link.action>
 						</f:then>
 						<f:else>
-							<f:if condition='{wish.statusmin} < 100'>
+							<f:if condition='{wish.statusMinPercent} < 100'>
 								<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn btn-success">
-									<i class="icon-wish icon-white"></i> Schenken
+									<i class="icon-gift icon-white"></i> Schenken
 								</f:link.action>
 							</f:if>
 						</f:else>
@@ -53,6 +68,10 @@
 			</f:link.action>
 			</p>
 	</div>
+	<f:if condition="{iwish.index} % 2">
+		</div><!-- start new row -->
+		<div class="row">
+	</f:if>
 </f:for>
 </div>
 </f:section>
