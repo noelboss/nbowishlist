@@ -75,6 +75,13 @@ class Tx_Nbowishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractE
 	 * @var string
 	 */
 	protected $images;
+	
+	/**
+	 * Shares
+	 *
+	 * @var float
+	 */
+	protected $shares;
 
 	/**
 	 * Participations
@@ -166,33 +173,6 @@ class Tx_Nbowishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractE
 		$this->price = $price;
 	}
 
-	/**
-	 * Returns the minshare
-	 *
-	 * @return float $minshare
-	 */
-	public function getMinshare() {
-		return $this->minshare;
-	}
-	
-	/**
-	 * Returns the minshare in percent
-	 *
-	 * @return float $minsharePercent
-	 */
-	public function getMinsharePercent() {
-		return $this->minshare / ($this->price / 100);
-	}
-
-	/**
-	 * Sets the minshare
-	 *
-	 * @param float $minshare
-	 * @return void
-	 */
-	public function setMinshare($minshare) {
-		$this->minshare = $minshare;
-	}
 
 	/**
 	 * Returns the notes
@@ -271,54 +251,6 @@ class Tx_Nbowishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractE
 		$this->participations = $participations;
 	}
 	
-	/**
-	 * Get Payment Status
-	 *
-	 */
-	public function getStatus() {
-		$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
-		$status = $repo->sharesByWish($this->getUid());
-		return $status;
-	}
-	
-	
-	/**
-	 * Get Remaining Amount
-	 *
-	 */
-	public function getRemaining() {
-		return $this->getPrice() - $this->getStatus() + $this->getMinshare();
-	}
-	
-	/**
-	 * Get Payment Status
-	 *
-	 */
-	public function getStatusPercent() {
-		$status = $this->getStatus();
-		$price = $this->getPrice();
-		if($price > 0){
-			$payed = $status / $price * 100;
-		} else if ($status) {
-			$payed = 100;
-		}
-		return $payed;
-	}
-	
-	/**
-	 * Get Payment Status
-	 *
-	 */
-	public function getStatusMinPercent() {
-		$status = $this->getStatusPercent();
-		if($status < 3){
-			return 3;
-		}
-		if($status > 100){
-			return 100;
-		}
-		return $status;
-	}
 	
 	/**
 	 * Get Shares
@@ -326,30 +258,82 @@ class Tx_Nbowishlist_Domain_Model_Wish extends Tx_Extbase_DomainObject_AbstractE
 	 * @return float shares
 	 */
 	public function getShares() {
-		$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
-		return $repo->sharesByWish($this->getUid());
+		if(!$this->shares){
+			$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
+			$this->shares = $repo->sharesByWish($this->getUid());
+		}
+		return $this->shares;
 	}
 	
+	/**
+	 * Get Min Share
+	 *
+	 * @return float minshare
+	 */
+	public function getMinshare() {
+		return $this->minshare;
+	}
+
+	
+	/**
+	 * Get Payment Shares
+	 *
+	 * @return integer SharesPercent
+	 *
+	 */
+	public function getSharesPercent() {
+		$shares = $this->getShares();
+		$price = $this->getPrice();
+		if($price > 0){
+			$payed = $shares / $price * 100;
+		} else if ($shares) {
+			$payed = 100;
+		}
+		return $payed;
+	}
+	
+	/**
+	 * Get Payment Shares
+	 *
+	 * @return integer SharesPercentMin
+	 *
+	 */
+	public function getSharesPercentMin() {
+		$shares = $this->getSharesPercent();
+		if($shares < 3){
+			return 3;
+		}
+		if($shares > 100){
+			return 100;
+		}
+		return $shares;
+	}
+
 	/**
 	 * Get remaining Shares
 	 *
 	 * @return float remaining shares
 	 */
 	public function getSharesRemaining() {
-		return $this->getPrice() - $this->getShares();
+		return $this->getPrice() - $this->getShares() + $this->getParticipationShare();
 	}
 	
 	/**
-	 * Wish has Reservation
+	 * Return the shares of the Participation related to this event
 	 *
-	 * @return boolean shares
+	 * @return float share
 	 */
-	public function getHasShares() {
-		$has = false;
-		if($this->getShares()){
-			$has =  true;
+	public function getParticipationShare() {
+		$shares = 0;
+		$wish = $this->getUid();
+		if($this->getShares() > 0){
+			$participation = Tx_Nboevents_Utility_Cookies::getCookieValue('Participation'.$wish);
+			if ($participation) {
+				$repo = t3lib_div::makeInstance('Tx_Nbowishlist_Domain_Repository_ParticipationRepository');
+				$shares = $repo->sharesByParticipationAndWish($participation,$wish);
+			}
 		}
-		return $has;
+		return $shares;
 	}
 }
 ?>

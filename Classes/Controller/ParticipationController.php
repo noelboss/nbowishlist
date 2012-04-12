@@ -92,13 +92,13 @@ class Tx_Nbowishlist_Controller_ParticipationController extends Tx_Extbase_MVC_C
 	 * action new
 	 *
 	 * @param $wish
-	 * @param $newParticipation
-	 * @param $newPerson
 	 *
 	 * @dontverifyrequesthash
 	 * @return void
 	 */
-	public function newAction(Tx_Nbowishlist_Domain_Model_Wish $wish, Tx_Nbowishlist_Domain_Model_Participation $newParticipation = NULL, Tx_Nbowishlist_Domain_Model_Person $newPerson = NULL) {
+	public function newAction(Tx_Nbowishlist_Domain_Model_Wish $wish) {
+		$newParticipation = $this->request->hasArgument('newParticipation') ? $this->request->getArgument('newParticipation') : NULL;
+		$newPerson = $this->request->hasArgument('newPerson') ? $this->request->getArgument('newPerson') : NULL;
 		if (!isset($newPerson)) {
 			$uid = Tx_Nboevents_Utility_Cookies::getCookieValue('Participation'.$wish->getUid());
 			if ($this->participationRepository->countByUid($uid) > 0) {

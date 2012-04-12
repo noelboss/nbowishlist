@@ -98,8 +98,36 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 		return $person;
 	}
 	
+	public function sharesByParticipationAndWish($uid = '0', $wish = '0') {
+		$shares = 0;
+		if($uid){
+			$query = $this->createQuery();
+			$query->getQuerySettings()->setReturnRawQueryResult(true);
+			$now = time();
+			$queryText = 'SELECT pc.share
+						FROM `tx_nbowishlist_domain_model_participation` AS pc
+						WHERE pc.wish = \'' . $wish . '\'
+						AND pc.uid = \'' . $uid . '\'
+						AND pc.deleted=0
+						AND pc.t3ver_state<=0
+						AND pc.pid<>-1
+						AND pc.hidden=0
+						AND pc.starttime<=' . $now . '
+						AND (pc.endtime=0 OR pc.endtime>' . $now . ')
+						AND pc.sys_language_uid IN (0,-1)
+						AND pc.pid IN (10) LIMIT 1';
+
+			$query->statement($queryText);
+			$rows = $query->execute();
+			foreach ($rows as $row) {
+				$shares += $row['share'];
+			}
+		}
+		return $shares;
+	}
+	
 	public function sharesByWish($uid = '0') {
-		$status = 0;
+		$shares = 0;
 		if($uid){
 			$query = $this->createQuery();
 			$query->getQuerySettings()->setReturnRawQueryResult(true);
@@ -120,10 +148,10 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 			$query->statement($queryText);
 			$rows = $query->execute();
 			foreach ($rows as $row) {
-				$status += $row['share'];
+				$shares += $row['share'];
 			}
 		}
-		return $status;
+		return $shares;
 	}
 	
 }

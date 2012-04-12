@@ -1,0 +1,44 @@
+.tx-nbowishlist .message-error {
+	display: none;
+}
+
+
+.tx-nbowishlist .row {
+	margin-bottom: 1em;
+}
+
+.tx-nbowishlist a.noColor{
+	color: inherit;
+}
+.tx-nbowishlist .noColor:hover{
+	color: #444;
+	text-decoration: none;
+}
+
+.tx-nbowishlist h1 .gifted,
+.tx-nbowishlist h2 .gifted {
+	margin-top: -0.2em;
+}
+
+.tx-nbowishlist .sliderControll {
+	margin-top: 7px;
+	width: 370px;
+}
+.tx-nbowishlist .sliderControll .minmax {
+	color: #999;
+	font-size: 0.8em;
+	margin-top: 0.25em;
+}
+.tx-nbowishlist .slider .progress {
+	height: 11px;
+	background: #aaa;
+}
+.tx-nbowishlist .ui-slider-handle {
+	cursor:pointer !important;
+	outline:none !important;
+}
+
+.tx-nbowishlist .noColor:hover{
+	color: #444;
+	text-decoration: none;
+}

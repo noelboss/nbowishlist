@@ -1,6 +1,6 @@
 <fieldset>
 	<legend>
-		<f:if condition="{wish.hasShares} > 0">
+		<f:if condition="{wish.participationShare} > 0">
 			<f:link.action action="delete" controller="Participation"
 						   arguments="{participation: newParticipation, wish:wish}"  class="btn btn btn-danger pull-right">
 				Beteiligung löschen <i class="icon-trash icon-white"></i>
@@ -8,12 +8,10 @@
 		</f:if>
 		Persönliche Angaben
 	</legend>
-	
-	<f:if condition="{newPerson.uid} > 0">
-		<input type="hidden" value="{newPerson.uid}" name="tx_nbowishlist_whishlist[newPerson][__identity]" />
-	</f:if>
-
 	<div class="control-group">
+		<f:if condition="{newPerson.uid} > 0">
+			<input type="hidden" value="{newPerson.uid}" name="tx_nbowishlist_whishlist[newPerson][__identity]" />
+		</f:if>
 		<label for="firstname" class="control-label">
 			<f:translate key="tx_nboevents_domain_model_person.firstname" /> <i class="icon-star-empty" title="Pflichtfeld"></i>
 		</label>
@@ -66,9 +64,10 @@
 			<f:format.raw><f:format.nl2br>{wish.notes}</f:format.nl2br></f:format.raw>
 		</div>
 	</f:if>
+	
 	<f:if condition="{wish.price}">
 		<f:then>
-			<f:if condition="{wish.minshare}">
+			<f:if condition="{wish.minshare} < {wish.sharesRemaining}">
 			<f:then>
 				<div class="control-group shareGroup">
 					<label class="control-label">
@@ -76,20 +75,22 @@
 					</label>
 					<div class="controls sliderControll">
 						<div class="slider" 
-							data-status="{wish.status}" 
-							data-share="{newParticipation.share}" 
+							data-participationshare="{wish.participationShare}" 
+							data-shares="{wish.shares}" 
 							data-price="{wish.price}" 
-							data-step="{wish.minshare}"			 data-target=".share" data-bar=".bar">
-							
+							data-step="{wish.minshare}"
+							data-max="{wish.sharesRemaining}"
+							data-target=".share" 
+							data-bar=".bar">
 							
 							<div class="progress progress-striped active
-							<f:if condition='{wish.statusMinPercent} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.statusMinPercent} < 70'>progress-warning</f:if></f:else></f:if>
-							<f:if condition='{wish.statusMinPercent} == 100'>progress-success</f:if>">
-							  <div class="bar" style="width: {wish.statusMinPercent}%;"></div>
+							<f:if condition='{wish.sharesPercentMin} < 20'><f:then>progress-danger</f:then><f:else><f:if condition='{wish.sharesPercentMin} < 70'>progress-warning</f:if></f:else></f:if>
+							<f:if condition='{wish.sharesPercentMin} == 100'>progress-success</f:if>">
+							  <div class="bar" style="width: {wish.sharesPercentMin}%;"></div>
 							</div>	
 						</div>
 						<span class="minmax pull-left"><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.minshare}</f:format.currency></span>
-						<span class="minmax pull-right"><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.remaining}</f:format.currency></span>
+						<span class="minmax pull-right"><f:format.currency currencySign="CHF" decimalSeparator="." thousandsSeparator="'">{wish.sharesRemaining}</f:format.currency></span>
 					</div>
 				</div>
 				<div class="control-group shareGroup">
@@ -109,7 +110,8 @@
 						<f:translate key="tx_nboevents_domain_model_reservation.price" />
 					</label>
 					<div class="controls">
-						<input type="text" class="span1" disabled="disabled" value="<f:format.currency currencySign='CHF' decimalSeparator='.' thousandsSeparator="'">{wish.price}</f:format.currency>">
+						<input type="text" class="span1" disabled="disabled" value="<f:format.currency currencySign='CHF' decimalSeparator='.' thousandsSeparator="'">{wish.sharesRemaining}</f:format.currency>">
+						<f:form.hidden property="share" class="share" value="{wish.sharesRemaining}" />
 					</div>
 				</div>
 			</f:else>

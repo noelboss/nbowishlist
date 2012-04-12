@@ -9,22 +9,20 @@ plugin.tx_nbowishlist {
 	}
 }
 
-plugin.tx_nbowishlist._CSS_DEFAULT_STYLE (
-	input.f3-form-error {
-		background-color:#FF9F9F;
-		border: 1px #FF0000 solid;
+page = PAGE
+page {
+	includeCSS {
+		bootstrap20 = 	EXT:nbowishlist/Resources/Public/css/bootstrap/bootstrap.css
+		slider = 		EXT:nbowishlist/Resources/Public/css/nivo-slider/nivo-slider.css
+		sliderTheme = 	EXT:nbowishlist/Resources/Public/css/nivo-slider/default.css
+		ui1818 =		EXT:nbowishlist/Resources/Public/css/jquery-ui/jquery-ui-1.8.18.custom.css
+		nbowishlist = 	EXT:nbowishlist/Resources/Public/css/application.css
 	}
-
-	.tx-nbowishlist table {
-		border-collapse:separate;
-		border-spacing:10px;
+	
+	includeJSFooter {
+		jq171 =			EXT:nbowishlist/Resources/Public/js/jquery-1.7.1.min.js
+		ui1818 =		EXT:nbowishlist/Resources/Public/js/jquery-ui-1.8.18.custom.min.js
+		slider = 		EXT:nbowishlist/Resources/Public/js/jquery.nivo.slider.pack.js
+		nbowishlist = 	EXT:nbowishlist/Resources/Public/js/application.js
 	}
-
-	.tx-nbowishlist table th {
-		font-weight:bold;
-	}
-
-	.tx-nbowishlist table td {
-		vertical-align:top;
-	}
-)
+}
