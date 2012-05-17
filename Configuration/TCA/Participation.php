@@ -119,6 +119,7 @@ $TCA['tx_nbowishlist_domain_model_participation'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_nboevents_domain_model_person',
+				'foreign_table_where' => 'AND tx_nboevents_domain_model_person.pid=###CURRENT_PID### AND tx_nboevents_domain_model_person.sys_language_uid IN (-1,0)',
 				'minitems' => 1,
 				'maxitems' => 1,
 				'wizards' => array(
@@ -152,6 +153,7 @@ $TCA['tx_nbowishlist_domain_model_participation'] = array(
 			'config' => array(
 				'type' => 'select',
 				'foreign_table' => 'tx_nbowishlist_domain_model_wish',
+				'foreign_table_where' => 'AND tx_nbowishlist_domain_model_wish.pid=###CURRENT_PID### AND tx_nbowishlist_domain_model_wish.sys_language_uid IN (-1,0)',
 				'minitems' => 1,
 				'maxitems' => 1,
 				'wizards' => array(
