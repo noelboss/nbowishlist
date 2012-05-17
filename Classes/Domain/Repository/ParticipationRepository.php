@@ -50,7 +50,7 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 					AND pc.starttime<=' . $now . '
 					AND (pc.endtime=0 OR pc.endtime>' . $now . ')
 					AND pc.sys_language_uid IN (0,-1)
-					AND pc.pid IN (10) LIMIT 1';
+					LIMIT 1';
 
 		$query->statement($queryText);
 		$rows = $query->execute();
@@ -90,7 +90,7 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 						AND pc.starttime<=' . $now . '
 						AND (pc.endtime=0 OR pc.endtime>' . $now . ')
 						AND pc.sys_language_uid IN (0,-1)
-						AND pc.pid IN (10) LIMIT 1';
+						LIMIT 1';
 			$query->statement($queryText);
 			$rows = $query->execute();
 			$person = $rows[0]['person']*1;
@@ -115,7 +115,7 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 						AND pc.starttime<=' . $now . '
 						AND (pc.endtime=0 OR pc.endtime>' . $now . ')
 						AND pc.sys_language_uid IN (0,-1)
-						AND pc.pid IN (10) LIMIT 1';
+						LIMIT 1';
 
 			$query->statement($queryText);
 			$rows = $query->execute();
@@ -143,7 +143,7 @@ class Tx_Nbowishlist_Domain_Repository_ParticipationRepository extends Tx_Extbas
 						AND pc.starttime<=' . $now . '
 						AND (pc.endtime=0 OR pc.endtime>' . $now . ')
 						AND pc.sys_language_uid IN (0,-1)
-						AND pc.pid IN (10) LIMIT 999';
+						LIMIT 999';
 
 			$query->statement($queryText);
 			$rows = $query->execute();
