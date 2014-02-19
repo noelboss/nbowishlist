@@ -25,7 +25,7 @@
 			var step = $t.data('step'); // minimal steps
 			var v =  (participationshare || step); // current position
 			var max = $t.data('max'); // minimal steps
-			console.log(v);
+			//console.log(v);
 			var options = {
 				min: step/pc, 
 				max: max/pc,

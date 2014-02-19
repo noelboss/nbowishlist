@@ -12,7 +12,7 @@ plugin.tx_nbowishlist {
 page = PAGE
 page {
 	includeCSS {
-		bootstrap20 = 	EXT:nbowishlist/Resources/Public/css/bootstrap/bootstrap.css
+		#bootstrap20 = 	EXT:nbowishlist/Resources/Public/css/bootstrap/bootstrap.css
 		slider = 		EXT:nbowishlist/Resources/Public/css/nivo-slider/nivo-slider.css
 		sliderTheme = 	EXT:nbowishlist/Resources/Public/css/nivo-slider/default.css
 		ui1818 =		EXT:nbowishlist/Resources/Public/css/jquery-ui/jquery-ui-1.8.18.custom.css

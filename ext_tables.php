@@ -99,7 +99,7 @@ if (TYPO3_MODE == 'BE') {
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_wish'][0]['fList'] = 'title,price,images';
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_wish'][0]['icon'] = TRUE;
 	
-	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_participation'][0]['fList'] = 'person,wish,share';
+	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_participation'][0]['fList'] = 'person,wish,share,note';
 	$GLOBALS['TYPO3_CONF_VARS']['EXTCONF']['cms']['db_layout']['addTables']['tx_nbowishlist_domain_model_participation'][0]['icon'] = TRUE;
 }
 ?>

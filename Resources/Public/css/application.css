@@ -1,3 +1,5 @@
+
+
 .tx-nbowishlist .message-error {
 	display: none;
 }
@@ -22,7 +24,7 @@
 
 .tx-nbowishlist .sliderControll {
 	margin-top: 7px;
-	width: 370px;
+	width: 300px;
 }
 .tx-nbowishlist .sliderControll .minmax {
 	color: #999;
@@ -41,4 +43,9 @@
 .tx-nbowishlist .noColor:hover{
 	color: #444;
 	text-decoration: none;
+}
+
+.tx-nbowishlist .slider .progress {
+	height: 14px;
+	background: #AAA;
 }

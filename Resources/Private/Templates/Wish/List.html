@@ -7,7 +7,7 @@
 				<f:then>
 					<div class="span2">
 						<f:link.action action="show" arguments="{wish : wish}"  class="thumbnail">
-							<f:image src="uploads/tx_nbowishlist/{wish.images.0}" alt="{resource.title}" width="170c" height="170c" />
+							<f:image src="uploads/tx_nbowishlist/{wish.images.0}" alt="{resource.title}" width="140c" height="140c" />
 						</f:link.action>
 					</div>
 					<div class="span4">
@@ -50,7 +50,6 @@
 			</f:link.action>
 			</p>
 			<p class="btn-group">
-				<br/>
 					<f:if condition="{wish.participationShare} > 0">
 						<f:then>
 							<f:link.action action="new" controller="Participation" arguments="{wish : wish}"  class="btn">
